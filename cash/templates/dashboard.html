@@ -1,0 +1,128 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CableConnect Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{% static 'dashboard.css' %}?v=1">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>CableConnect</h2>
+
+    <a href="{% url 'dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'customer_display' %}">Customers</a>
+    <a href="{% url 'package' %}">Packages</a>
+    <a href="{% url 'payments_display' %}">Payments</a>
+    <a href="{% url 'monthlybill' %}">Monthly Bills</a>
+    <a href="{% url 'complaint' %}">Complaint    </a>
+    <form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        Logout
+    </button>
+</form>
+
+</div>
+
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <h1>Dashboard</h1>
+        <p>Welcome to CableConnect Management System</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card blue">
+            <h3>Total Customers</h3>
+            <h1>{{ total_customers }}</h1>
+        </div>
+
+        <div class="card green">
+            <h3>Active Customers</h3>
+            <h1>{{ active_customers }}</h1>
+        </div>
+
+        <div class="card purple">
+            <h3>Total Packages</h3>
+            <h1>{{ total_packages }}</h1>
+        </div>
+
+        <div class="card orange">
+            <h3>Total Collection</h3>
+            <h1>₹ {{ total_collection|floatformat:2 }}</h1>
+        </div>
+
+        <div class="card red">
+            <h3>Pending Bills</h3>
+            <h1>{{ pending_bills }}</h1>
+        </div>
+
+        <div class="card teal">
+            <h3>Paid Bills</h3>
+            <h1>{{ paid_bills }}</h1>
+        </div>
+
+    </div>
+
+    <div class="pending">
+        <h2>Pending Amount</h2>
+        <h1>₹ {{ pending_amount|floatformat:2 }}</h1>
+    </div>
+
+    <div class="table-container">
+
+        <h2>Recent Payments</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Amount To Be Paid</th>
+                    <th>Amount Paid</th>
+                    <th>Remaining Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for payment in recent_payments %}
+
+                <tr>
+                    <td>{{ payment.customer.customer_name }}</td>
+                    <td>₹ {{ payment.amount_to_be_paid }}</td>
+                    <td>₹ {{ payment.amount_paid }}</td>
+                    <td>₹ {{ payment.remaining_amount }}</td>
+                    <td>{{ payment.payment_status }}</td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="5">No payment records found</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

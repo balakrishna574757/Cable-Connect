@@ -1,0 +1,96 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Details</title>
+
+    <link rel="stylesheet" href="{% static 'sidebar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'payment.css' %}?v=6">
+</head>
+<body>
+
+    {% include 'sidebar.html' %}
+
+    <div class="page-content">
+
+        <div class="page-header">
+            <h1>Payment Details</h1>
+            <p>Manage Customer Payments and Collections</p>
+        </div>
+
+        <div class="add-payment-section">
+            <a href="{% url 'payment' %}" class="add-btn">
+                + Add Payment
+            </a>
+        </div>
+
+        <div class="table-container">
+
+            <h2>Payment List</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Customer Name</th>
+                        <th>Amount To Be Paid</th>
+                        <th>Amount Paid</th>
+                        <th>Remaining Amount</th>
+                        <th>Payment Status</th>
+                        <th>Paid Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in payments %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>{{ i.customer.customer_name }}</td>
+
+                        <td>₹ {{ i.amount_to_be_paid }}</td>
+
+                        <td>₹ {{ i.amount_paid }}</td>
+
+                        <td>₹ {{ i.remaining_amount }}</td>
+
+                        <td>
+                            {% if i.payment_status == "Paid" %}
+                                <span class="paid">Paid</span>
+                            {% elif i.payment_status == "Pending" %}
+                                <span class="pending">Pending</span>
+                            {% else %}
+                                <span class="partial">Partial</span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ i.paid_date|default:"-" }}</td>
+
+                        <td>
+                            <a href="{% url 'payment-edit' i.id %}" class="edit-btn">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="empty">
+                            No Payment Records Found
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

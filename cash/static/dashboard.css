@@ -1,0 +1,215 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    display: flex;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #172554;
+    padding: 30px 20px;
+    position: fixed;
+}
+
+.sidebar h2 {
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #2563eb;
+    color: white;
+}
+
+/* Main Content */
+
+.main {
+    margin-left: 240px;
+    padding: 35px;
+    width: calc(100% - 240px);
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #172554;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #64748b;
+}
+
+/* Dashboard Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    padding: 25px;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    font-size: 17px;
+    margin-bottom: 18px;
+}
+
+.card h1 {
+    font-size: 30px;
+}
+
+.blue {
+    background: #2563eb;
+}
+
+.green {
+    background: #16a34a;
+}
+
+.purple {
+    background: #7c3aed;
+}
+
+.orange {
+    background: #ea580c;
+}
+
+.red {
+    background: #dc2626;
+}
+
+.teal {
+    background: #0d9488;
+}
+
+/* Pending Amount */
+
+.pending {
+    background: white;
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 12px;
+    border-left: 5px solid #dc2626;
+}
+
+.pending h2 {
+    color: #334155;
+    margin-bottom: 12px;
+}
+
+.pending h1 {
+    color: #dc2626;
+}
+
+/* Recent Payments Table */
+
+.table-container {
+    background: white;
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.table-container h2 {
+    color: #172554;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #172554;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 150px;
+        padding: 15px 10px;
+    }
+
+    .sidebar h2 {
+        font-size: 18px;
+    }
+
+    .main {
+        margin-left: 150px;
+        width: calc(100% - 150px);
+        padding: 15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.logout-btn {
+    width: 100%;
+    padding: 12px 18px;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #b91c1c;
+}

@@ -1,0 +1,86 @@
+# numbers = [10, 20, 30, 40]
+
+# largest = numbers[0]
+
+# for number in numbers:
+#     if number > largest:
+#         largest = number
+
+# print(largest)
+
+# print("---------------------------------")
+
+# name="bala"
+# reverse=""
+
+# for i in name:
+#         reverse=i+reverse
+#         print(reverse)
+
+# print("---------------------------------")        
+
+
+# number=7
+# count=0
+
+
+# for i in range(1, number + 1):
+#     if number % i == 0:
+#         count += 1
+
+# if count == 2:
+#     print("prime number")
+# else:
+#     print("not prime")
+
+# print("--------------------------")    
+
+
+
+
+
+# number=[10,20,50,30]
+# total=0
+
+# for number in numbers:
+#     total=total+number
+
+#     print(total)
+
+
+# print("-------------------")
+
+
+
+# name = "balakrishnan"
+# count = 0
+
+# for i in name:
+#     if i in "aeiou":
+#         count += 1
+
+# print("Vowels count:", count)
+
+
+# print("------------------------------")
+# number = 5
+# fact = 1
+
+# for i in range(1, number + 1):
+#     fact = fact * i
+
+# print("Factorial:", fact)
+
+# print("---------------------------")
+
+
+# n = 10
+
+# a = 0
+# b = 1
+
+# for i in range(n):
+#     print(a)
+#     c = a + b
+#     a = b
+#     b = c

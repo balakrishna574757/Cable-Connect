@@ -1,0 +1,164 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Management</title>
+
+    <link rel="stylesheet" href="{% static 'sidebar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'complaint.css' %}?v=3">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+
+    <!-- Main Content -->
+    <div class="page-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div>
+                <h1>Complaint Management</h1>
+                <p>Manage Customer Complaints</p>
+            </div>
+        </div>
+
+        <!-- Add Complaint Form -->
+        <div class="form-card">
+
+            <h2>Add Customer Complaint</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <!-- Customer -->
+                    <div class="form-group">
+                        <label for="{{ form.customer.id_for_label }}">
+                            Customer
+                        </label>
+                        {{ form.customer }}
+                        {{ form.customer.errors }}
+                    </div>
+
+                    <!-- Complaint Title -->
+                    <div class="form-group">
+                        <label for="{{ form.complaint_title.id_for_label }}">
+                            Complaint Title
+                        </label>
+                        {{ form.complaint_title }}
+                        {{ form.complaint_title.errors }}
+                    </div>
+
+                    <!-- Complaint Description -->
+                    <div class="form-group full-width">
+                        <label for="{{ form.complaint_description.id_for_label }}">
+                            Complaint Description
+                        </label>
+                        {{ form.complaint_description }}
+                        {{ form.complaint_description.errors }}
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label for="{{ form.status.id_for_label }}">
+                            Complaint Status
+                        </label>
+                        {{ form.status }}
+                        {{ form.status.errors }}
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Submit Complaint
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Complaint Details Table -->
+        <div class="table-card">
+
+            <h2>Complaint Details</h2>
+
+            <div class="table-responsive">
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Customer Name</th>
+                            <th>Complaint Title</th>
+                            <th>Complaint Description</th>
+                            <th>Complaint Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for complaint in complaints %}
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>
+                                <a href="{% url 'customer_display' %}" class="customer-link">
+                                    {{ complaint.customer.customer_name }}
+                                </a>
+                            </td>
+
+                            <td>{{ complaint.complaint_title }}</td>
+
+                            <td>{{ complaint.complaint_description }}</td>
+
+                            <td>{{ complaint.complaint_date }}</td>
+
+                            <td>
+                                <span class="status-badge
+                                    {% if complaint.status == 'Resolved' %}
+                                        resolved
+                                    {% elif complaint.status == 'In Progress' %}
+                                        in-progress
+                                    {% else %}
+                                        pending
+                                    {% endif %}">
+                                    {{ complaint.status }}
+                                </span>
+                            </td>
+                            <td>
+    <a href="{% url 'complaint_edit' complaint.id %}" class="edit-btn">
+        Edit
+    </a>
+</td>
+
+                        </tr>
+
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="empty-message">
+                                No Complaints Found
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

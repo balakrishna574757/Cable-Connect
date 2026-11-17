@@ -1,0 +1,253 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+}
+
+/* Main Content */
+.page-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    padding: 30px;
+    background: #f4f6fb;
+}
+
+/* Page Heading */
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    color: #263d70;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+
+.form-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.form-heading h2,
+.table-container h2 {
+    color: #263d70;
+    font-size: 21px;
+}
+
+/* Two Column Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #344054;
+    margin-bottom: 9px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d5dce8;
+    border-radius: 7px;
+    font-size: 14px;
+    background: white;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #536dce;
+    box-shadow: 0 0 0 3px rgba(83,109,206,0.10);
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.button-group button {
+    padding: 12px 30px;
+    background: #3157c8;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-group button:hover {
+    background: #203f9e;
+}
+
+.view-btn,
+.cancel-btn,
+.add-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.view-btn {
+    background: #16845b;
+}
+
+.cancel-btn {
+    background: #64748b;
+}
+
+.add-btn {
+    background: #3157c8;
+}
+
+.add-btn:hover {
+    background: #203f9e;
+}
+
+/* Add Payment Button */
+.add-payment-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* Payment Table */
+.table-container {
+    width: 100%;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+.table-container h2 {
+    margin-bottom: 20px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.table-container th {
+    background: #263d70;
+    color: white;
+    padding: 15px 12px;
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.table-container td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e5e9f0;
+    color: #444;
+    font-size: 14px;
+}
+
+.table-container tbody tr:hover {
+    background: #f2f5fc;
+}
+
+/* Payment Status */
+.paid {
+    background: #d9f5e5;
+    color: #16834b;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pending {
+    background: #ffe8cc;
+    color: #c77700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.partial {
+    background: #e1e8ff;
+    color: #3157c8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.empty {
+    text-align: center;
+    padding: 25px !important;
+    color: #888 !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .page-content {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .table-container {
+        padding: 15px;
+ 
+    }
+    
+}

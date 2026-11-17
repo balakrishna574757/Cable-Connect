@@ -1,0 +1,359 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Details</title>
+
+    <link rel="stylesheet" href="{% static 'sidebar.css' %}?v=1">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        /* Main Content */
+
+        .main-content {
+            margin-left: 290px;
+            width: calc(100% - 290px);
+            min-height: 100vh;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .page-title {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #222;
+        }
+
+        /* Customer Card */
+
+        .customer-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+            margin-bottom: 35px;
+            width: 100%;
+        }
+
+        .customer-card h3 {
+            font-size: 22px;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .customer-info {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .info-item {
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .info-item strong {
+            display: block;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .info-item span {
+            font-size: 15px;
+            color: #222;
+        }
+
+        /* Complaints Section */
+
+        .complaints-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+            width: 100%;
+        }
+
+        .complaints-section h2 {
+            font-size: 21px;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: #333;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        td {
+            overflow-wrap: anywhere;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Status Badges */
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .in-progress {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .resolved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* Edit Button */
+
+        .edit-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .edit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Empty Message */
+
+        .no-complaints {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 18px;
+            }
+
+            .customer-info {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 22px;
+            }
+
+            .customer-card,
+            .complaints-section {
+                padding: 18px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    {% include 'sidebar.html' %}
+
+    <div class="main-content">
+
+        <h1 class="page-title">Customer Details</h1>
+
+        <!-- Customer Details Card -->
+
+        <div class="customer-card">
+
+            <h3>{{ customer.customer_name }}</h3>
+
+            <div class="customer-info">
+
+                <div class="info-item">
+                    <strong>Customer Name</strong>
+                    <span>{{ customer.customer_name }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Phone Number</strong>
+                    <span>{{ customer.phone }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Box Number</strong>
+                    <span>{{ customer.box_number }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Address</strong>
+                    <span>{{ customer.address }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Connection Date</strong>
+                    <span>{{ customer.connection_date }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Package</strong>
+                    <span>{{ customer.package }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Area</strong>
+                    <span>{{ customer.area|default:"Not Assigned" }}</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>Connection Status</strong>
+
+                    <span>
+                        {% if customer.is_active %}
+                            Active
+                        {% else %}
+                            Inactive
+                        {% endif %}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Customer Complaints -->
+
+        <div class="complaints-section">
+
+            <h2>Customer Complaints</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Complaint Title</th>
+                            <th>Description</th>
+                            <th>Complaint Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for complaint in complaints %}
+
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>
+                                {{ complaint.complaint_title }}
+                            </td>
+
+                            <td>
+                                {{ complaint.complaint_description }}
+                            </td>
+
+                            <td>
+                                {{ complaint.complaint_date }}
+                            </td>
+
+                            <td>
+                                <span class="status {{ complaint.status|lower|slugify }}">
+                                    {{ complaint.status }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <a href="{% url 'complaint_edit' complaint.id %}" class="edit-btn">
+                                    Edit
+                                </a>
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="6" class="no-complaints">
+                                No complaints found for this customer.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

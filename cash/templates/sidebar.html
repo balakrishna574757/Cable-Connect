@@ -1,0 +1,41 @@
+
+{% load static %}
+
+<div class="sidebar">
+
+    <h2>CableConnect</h2>
+
+    <p class="menu-title">MAIN MENU</p>
+
+    <a href="{% url 'dashboard' %}">
+        Dashboard
+    </a>
+
+    <a href="{% url 'customer_display' %}">
+        Customer Details
+    </a>
+
+    <a href="{% url 'package' %}">
+        Package Details
+    </a>
+
+    <a href="{% url 'payments_display' %}">
+        Payment Details
+    </a>
+
+    <a href="{% url 'monthlybill' %}">
+        Monthly Bill Details
+    </a>
+
+     <a href="{% url 'complaint' %}">
+Complaint    </a>
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        Logout
+    </button>
+</form>
+
+</div>

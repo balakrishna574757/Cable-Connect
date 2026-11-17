@@ -1,0 +1,44 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Package</title>
+    <link rel="stylesheet" href="{% static 'sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'package.css' %}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="page-content">
+
+    <div class="delete-container">
+
+        <h2>Delete Package</h2>
+
+        <p>Are you sure you want to delete
+            <strong>{{ package.package_name }}</strong>?
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <button type="submit" class="confirm-delete">
+                Yes, Delete
+            </button>
+
+            <a href="{% url 'package' %}" class="back-btn">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Monthly Bill</title>
+
+    <link rel="stylesheet" href="{% static 'sidebar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'monthlybill.css' %}">
+</head>
+
+<body>
+
+    {% include 'sidebar.html' %}
+
+    <div class="page-content">
+
+        <div class="container">
+
+            <h1>Monthly Bill Management</h1>
+            <p class="subtitle">Manage Customer Monthly Bills</p>
+
+            <!-- Edit Monthly Bill Form -->
+
+            <div class="form-container">
+
+                <h2>Update Monthly Bill</h2>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Customer</label>
+                            {{ form.customer }}
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bill Month</label>
+                            {{ form.bill_month }}
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bill Amount</label>
+                            {{ form.bill_amount }}
+                        </div>
+
+                        <div class="form-group">
+                            <label>Due Date</label>
+                            {{ form.due_date }}
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <label>Is Paid</label>
+                            {{ form.is_paid }}
+                        </div>
+
+                    </div>
+
+                    <div class="button-group">
+
+                        <button type="submit">
+                            Update Monthly Bill
+                        </button>
+
+                        <a href="{% url 'monthlybill' %}" class="cancel-btn">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
