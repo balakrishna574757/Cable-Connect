@@ -219,7 +219,7 @@ def monthlybill_view(request):
 
     bills = MonthlyBill.objects.all().order_by('-id')
 
-    return render(request, 'monthlybill.html', {
+    return render(request, 'MonthlyBill.html', {
         'form': form,
         'bills': bills
     })
