@@ -1,4 +1,6 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +8,173 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Edit Complaint</title>
+    <title>Edit Customer</title>
 
     <link rel="stylesheet" href="{% static 'sidebar.css' %}?v=1">
-    <link rel="stylesheet" href="{% static 'complaint.css' %}?v=1">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #333;
+        }
+
+        .main-content {
+            margin-left: 290px;
+            width: calc(100% - 290px);
+            min-height: 100vh;
+            padding: 35px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 27px;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            width: 100%;
+        }
+
+        .form-container h2 {
+            margin-bottom: 25px;
+            font-size: 21px;
+            color: #2563eb;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 9px;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .errorlist {
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 5px;
+            list-style: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .update-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .update-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .cancel-btn {
+            background: #64748b;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .cancel-btn:hover {
+            background: #475569;
+        }
+
+        @media(max-width: 768px) {
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -17,26 +182,20 @@
 
     {% include 'sidebar.html' %}
 
-    <div class="page-content">
+    <div class="main-content">
 
-        <!-- Header -->
         <div class="header">
 
             <div>
-                <h1>Edit Complaint</h1>
-                <p>Update Complaint Details</p>
+                <h1>Edit Customer</h1>
+                <p>Update Customer Information</p>
             </div>
-
-            <a href="{% url 'customer_details' complaint.customer.id %}" class="view-btn">
-                View Customer Details
-            </a>
 
         </div>
 
-        <!-- Edit Form -->
         <div class="form-container">
 
-            <h2>Update Complaint Details</h2>
+            <h2>Customer Details</h2>
 
             <form method="POST">
 
@@ -45,39 +204,63 @@
                 <div class="form-grid">
 
                     <div class="form-group">
-                        <label>Customer</label>
-                        {{ form.customer }}
-                        {{ form.customer.errors }}
+                        <label>Customer Name</label>
+                        {{ form.customer_name }}
+                        {{ form.customer_name.errors }}
                     </div>
 
                     <div class="form-group">
-                        <label>Complaint Title</label>
-                        {{ form.complaint_title }}
-                        {{ form.complaint_title.errors }}
+                        <label>Phone Number</label>
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Box Number</label>
+                        {{ form.box_number }}
+                        {{ form.box_number.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Connection Date</label>
+                        {{ form.connection_date }}
+                        {{ form.connection_date.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Package</label>
+                        {{ form.package }}
+                        {{ form.package.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Area</label>
+                        {{ form.area }}
+                        {{ form.area.errors }}
                     </div>
 
                     <div class="form-group full-width">
-                        <label>Complaint Description</label>
-                        {{ form.complaint_description }}
-                        {{ form.complaint_description.errors }}
+                        <label>Address</label>
+                        {{ form.address }}
+                        {{ form.address.errors }}
                     </div>
 
                     <div class="form-group">
-                        <label>Complaint Status</label>
-                        {{ form.status }}
-                        {{ form.status.errors }}
+                        <label>Connection Status</label>
+                        {{ form.is_active }}
+                        {{ form.is_active.errors }}
                     </div>
 
                 </div>
 
-                <!-- Buttons -->
                 <div class="button-group">
 
-                    <button type="submit">
-                        Update Complaint
+                    <button type="submit" class="update-btn">
+                        Update Customer
                     </button>
 
-                    <a href="{% url 'customer_details' complaint.customer.id %}" class="cancel-btn">
+                    <a href="{% url 'customer_details' customer.id %}"
+                       class="cancel-btn">
                         Cancel
                     </a>
 
@@ -90,5 +273,4 @@
     </div>
 
 </body>
-
 </html>

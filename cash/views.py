@@ -57,13 +57,46 @@ def package_edit(request, id):
 
 # DELETE
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import ProtectedError
+from .models import ConnectionPackage
+
+
 def package_delete(request, id):
 
-    package = get_object_or_404(ConnectionPackage, id=id)
+    package = get_object_or_404(
+        ConnectionPackage,
+        id=id
+    )
 
-    if request.method == "POST":
-        package.delete()
-        return redirect('package')
+    if request.method == 'POST':
+
+        try:
+            package.delete()
+
+            return redirect('package')
+
+        except ProtectedError:
+
+            customers = package.customer_set.all()
+
+            customer_names = ", ".join(
+                customers.values_list(
+                    'customer_name',
+                    flat=True
+                )
+            )
+
+            error_message = (
+                f"This package is assigned to existing customers: "
+                f"{customer_names}. Please deactivate this package "
+                f"instead of deleting it."
+            )
+
+            return render(request, 'package_delete.html', {
+                'package': package,
+                'error_message': error_message
+            })
 
     return render(request, 'package_delete.html', {
         'package': package

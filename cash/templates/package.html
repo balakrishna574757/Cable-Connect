@@ -103,8 +103,22 @@
                         <a href="{% url 'package-edit' package.id %}"
                            class="edit-btn">Edit</a>
 
-                        <a href="{% url 'package-delete' package.id %}"
-                           class="delete-btn">Delete</a>
+                       
+                    </td>
+                    <td>
+                         <form method="POST"
+          action="{% url 'package-delete' package.id %}"
+          style="display: inline;">
+
+        {% csrf_token %}
+
+        <button type="submit"
+                class="delete-btn"
+                onclick="return confirm('Are you sure you want to delete this package?');">
+            Delete
+        </button>
+
+    </form>
                     </td>
                 </tr>
 
